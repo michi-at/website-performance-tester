@@ -1,0 +1,9 @@
+@import 'variables';
+
+:host {
+    @extend .defaultHost;
+}
+
+.container {
+    width: 100%;
+}

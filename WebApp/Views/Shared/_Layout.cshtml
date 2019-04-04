@@ -8,15 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/signalr@2.4.0/jquery.signalR.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.signalR.js"></script>
 </head>
 <body>
 
-@RenderBody()
+    @RenderBody()
 
+    <script type="text/javascript" src="~/angular/runtime.js"></script>
+    <script type="text/javascript" src="~/angular/es2015-polyfills.js" nomodule></script>
+    <script type="text/javascript" src="~/angular/polyfills.js"></script>
+    <script type="text/javascript" src="~/angular/styles.js"></script>
+    <script type="text/javascript" src="~/angular/main.js"></script>
 </body>
 </html>

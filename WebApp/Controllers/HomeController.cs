@@ -31,8 +31,9 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Index(string uri)
         {
-            hubContext.Clients.All.update("test message");
-            return Content(JsonConvert.SerializeObject(new { message = "test message" } ), jsonContentType);
+            var test = new {message = "test message"};
+            hubContext.Clients.All.update(test);
+            return Content(JsonConvert.SerializeObject(test), jsonContentType);
         }
     }
 }

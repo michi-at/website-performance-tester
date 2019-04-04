@@ -4,19 +4,11 @@ using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace WebApp
 {
+    [HubName("MainHub")]
     public class MainHub : Hub
     {
-        private IConnectionManager manager;
-        private IHubContext context;
-
-        public MainHub(IConnectionManager manager)
-        {
-            this.manager = manager;
-            context = this.manager.GetHubContext<MainHub>();
-        }
-
         [HubMethodName("NewMessage")]
-        public void NewMessage(string message)
+        public void NewMessage(dynamic message)
         {
             Clients.All.update(message);
         }

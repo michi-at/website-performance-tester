@@ -1,0 +1,43 @@
+<div class="container" fxLayoutAlign="center center" fxLayout="column" fxFlexAlign="center">
+  <div>
+    <h1 fxFlexAlign="start">History</h1>
+    <div *ngIf="selectedResult">Selected {{selectedResult.authority | uppercase}}
+    </div>
+  </div>
+  <table mat-table [dataSource]="testResults" class="mat-elevation-z8" color="accent">
+
+    <ng-container matColumnDef="testResultId">
+      <th mat-header-cell *matHeaderCellDef fxShow fxHide.xs.screen> Id </th>
+      <td mat-cell *matCellDef="let element" fxShow fxHide.xs.screen> {{element.testResultId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="authority">
+      <th mat-header-cell *matHeaderCellDef ngClass.xs.screen="first-element"> Authority </th>
+      <td mat-cell *matCellDef="let element" ngClass.xs.screen="first-element"> {{element.authority}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="minResponseTime">
+      <th mat-header-cell *matHeaderCellDef fxShow fxHide.xs.screen> Min. response time </th>
+      <td mat-cell *matCellDef="let element" fxShow fxHide.xs.screen> {{element.minResponseTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="maxResponseTime">
+      <th mat-header-cell *matHeaderCellDef fxShow fxHide.xs.screen> Max. response time </th>
+      <td mat-cell *matCellDef="let element" fxShow fxHide.xs.screen> {{element.maxResponseTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meanResponseTime">
+      <th mat-header-cell *matHeaderCellDef ngClass.xs="last-element"> Mean response time </th>
+      <td mat-cell *matCellDef="let element" ngClass.xs="last-element"> {{element.meanResponseTime}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="testDate">
+      <th mat-header-cell *matHeaderCellDef fxShow fxHide.xs> Date </th>
+      <td mat-cell *matCellDef="let element" fxShow fxHide.xs> {{element.testDate.toLocaleString()}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)"
+        [class.selected]="selectedResult && (row.testResultId === selectedResult.testResultId)"></tr>
+  </table>
+</div>
