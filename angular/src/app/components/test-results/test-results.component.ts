@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TEST_RESULTS } from 'src/app/models/mock-test-results';
 import { TestResult } from 'src/app/models/test-result';
-import { MatRowDef, MatRow } from '@angular/material';
+import { MatRow } from '@angular/material';
 import { Router } from '@angular/router';
+import { TestResultService } from 'src/app/services/test-result.service';
 
 @Component({
     selector: 'app-test-results',
@@ -11,20 +11,39 @@ import { Router } from '@angular/router';
 })
 
 export class TestResultsComponent implements OnInit {
-
-    testResults = TEST_RESULTS;
     selectedResult: TestResult;
+    testResults: TestResult[];
 
-    displayedColumns: string[] = ['testResultId', 'authority', 'minResponseTime', 'maxResponseTime', 'meanResponseTime',
-        'testDate'];
+    public settings: { [k: string]: string };
+    public data: any[];
 
-    constructor(private router: Router) { }
+    constructor(private router: Router, private testResultService: TestResultService) {
+        this.settings = {
+            testResultId: 'Id',
+            authority: 'Authority',
+            minResponseTime: 'Min. response time',
+            maxResponseTime: 'Max. response time',
+            meanResponseTime: 'Mean response time',
+            testDate: 'Date'
+        };
+    }
 
     ngOnInit() {
+        this.getResults();
+        this.data = this.testResults.map(element => {
+            const { testDate, ...rest }: any = element;
+            rest.testDate = testDate.toLocaleString();
+            return rest;
+        });
+    }
+
+    getResults() {
+        this.testResultService.getResults()
+                              .subscribe(results => this.testResults = results);
     }
 
     onSelect(result: MatRow): void {
         this.selectedResult = new TestResult(result);
-        //this.router.navigate(['/details', this.selectedResult.testResultId]);
+        this.router.navigate(['/details', this.selectedResult.testResultId]);
     }
 }

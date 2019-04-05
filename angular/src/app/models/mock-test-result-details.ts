@@ -14,5 +14,5 @@ export const TEST_RESULT_DETAILS: TestResultDetail[] = [
     { testResultDetailId: 6, uri: 'https://angular.io/guide/quickstart', responseTime: 684, minResponseTime: 240,
     maxResponseTime: 684, meanResponseTime: 464 },
     { testResultDetailId: 7, uri: 'https://angular.io/license', responseTime: 299, minResponseTime: 299,
-    maxResponseTime: 790, meanResponseTime: 593.333 }
+    maxResponseTime: 790, meanResponseTime: 593.333 },
 ];

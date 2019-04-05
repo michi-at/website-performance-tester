@@ -14,10 +14,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from '../layout/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { DataTableComponent } from '../components/data-table/data-table.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
     declarations: [
         HeaderComponent,
+        DataTableComponent,
     ],
     imports: [
         BrowserAnimationsModule,
@@ -32,6 +35,7 @@ import { FormsModule } from '@angular/forms';
         MatPaginatorModule,
         FormsModule,
         MatListModule,
+        GoogleChartsModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -47,6 +51,8 @@ import { FormsModule } from '@angular/forms';
         MatPaginatorModule,
         FormsModule,
         MatListModule,
+        DataTableComponent,
+        GoogleChartsModule,
     ]
 })
 export class UIModule { }

@@ -8,3 +8,11 @@ $accent-palette: mat-palette($mat-pink);
     width: 100%;
     height: 100%;
 }
+
+.defaultContainer {
+    width: 100%;
+    padding: 15px 15px;
+    > * {
+        width: 100%;
+    }
+}

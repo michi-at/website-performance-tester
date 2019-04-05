@@ -1,5 +1,43 @@
 @import 'variables';
 
 :host {
-    @extend .defaultHost;
+  @extend .defaultHost;
+
+  &::ng-deep {
+    google-chart {
+      min-width: 98%;
+    }
+  }
+}
+
+.container {
+  @extend .defaultContainer;
+}
+
+@media only screen and (max-width: 599px) {
+  :host {
+    &::ng-deep {
+
+      .mat-header-cell:first-child,
+      .mat-header-cell:nth-child(3),
+      .mat-row .mat-cell:first-child,
+      .mat-row .mat-cell:nth-child(3) {
+        display: none;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  :host {
+    &::ng-deep {
+
+      .mat-header-cell:nth-child(4),
+      .mat-header-cell:nth-child(5),
+      .mat-row .mat-cell:nth-child(4),
+      .mat-row .mat-cell:nth-child(5) {
+        display: none;
+      }
+    }
+  }
 }

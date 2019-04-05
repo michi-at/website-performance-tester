@@ -18,7 +18,7 @@ import { TestResultDetailsComponent } from './components/test-result-details/tes
     TestResultsComponent,
     TestResultDetailsComponent,
     CustomShowHideDirective,
-    CustomNgClassDirective
+    CustomNgClassDirective,
   ],
   imports: [
     BrowserModule,

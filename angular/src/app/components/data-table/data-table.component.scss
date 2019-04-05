@@ -1,0 +1,53 @@
+@import 'variables';
+
+:host {
+    @extend .defaultHost;
+}
+.hover {
+    background-color: map-get($accent-palette, 100);
+    cursor: pointer;
+}
+
+.selected {
+    @extend .hover;
+    background-color: map-get($accent-palette, 200);
+}
+
+.selected:hover {
+    background-color: map-get($accent-palette, 300) !important;
+}
+
+tr.mat-row:hover {
+    @extend .hover;
+}
+
+.first-element {
+    padding-left: 24px !important;
+}
+
+.last-element {
+    padding-right: 24px !important;
+}
+
+td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type, th.mat-header-cell:first-of-type {
+    @extend .first-element;
+}
+
+td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type, th.mat-header-cell:last-of-type {
+    @extend .last-element;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  padding: 5px;
+  text-align: center;
+}
+
+.container {
+    width: 100%;
+    padding: 15px 15px;
+    > * {
+        width: 100%;
+    }
+}
