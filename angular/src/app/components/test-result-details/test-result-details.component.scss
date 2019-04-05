@@ -4,7 +4,7 @@
   @extend .defaultHost;
 
   &::ng-deep {
-    google-chart {
+    app-bar-chart {
       min-width: 98%;
     }
   }

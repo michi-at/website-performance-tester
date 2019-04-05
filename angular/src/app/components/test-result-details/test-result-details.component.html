@@ -5,9 +5,9 @@
 
   <div style="overflow-y: auto; max-height: 400px; min-height: 0; width: 100%; ">
     <div style="overflow: hidden;">
-      <google-chart #chart [type]="'Bar'" [data]="data" [dynamicResize]="true" [options]="chartOptions" style="width: 98%;"
-                    [columnNames]="columnNames">
-      </google-chart>
+      <app-bar-chart #chart [type]="'Bar'" [data]="data" [dynamicResize]="true" [options]="chartOptions"
+                    style="width: 98%;" [columnNames]="columnNames">
+      </app-bar-chart>
     </div>
   </div>
   <app-data-table [data]="testResultDetails" [propertyTitles]="settings"></app-data-table>
