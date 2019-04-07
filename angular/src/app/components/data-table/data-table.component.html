@@ -3,8 +3,9 @@
 
     <ng-container [matColumnDef]="column" *ngFor="let column of columns">
       <th mat-header-cell *matHeaderCellDef> {{ propertyTitles[column] }} </th>
-      <td mat-cell *matCellDef="let element">
-        {{ element[column] }}
+      <td mat-cell *matCellDef="let element" [innerHtml]="
+        (formatColumns[column] ? formatColumns[column](element[column])
+                               : element[column]) | sanitizeHtml">
       </td>
     </ng-container>
 

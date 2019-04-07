@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TestResultDetail } from 'src/app/models/test-result-detail';
-import { TestResultService } from 'src/app/services/test-result.service';
 import { Location } from '@angular/common';
 import { GoogleChartComponent } from 'angular-google-charts';
+import { SignalRService } from 'src/app/services/signalr.service';
 
 @Component({
     selector: 'app-test-result-details',
@@ -15,22 +15,31 @@ export class TestResultDetailsComponent implements OnInit {
 
     testResultDetails: TestResultDetail[];
     data: any[];
-    chartOptions: any = { chart: { title: 'Pages performance' }, stacked: true, bars: 'horizontal' };
+    chartOptions: any = {
+        chart: { title: 'Pages performance' },
+        stacked: true,
+        bars: 'horizontal',
+    };
     columnNames: string[];
-    public settings: { [k: string]: string };
+    settings: { [k: string]: string };
+    formatColumns: any = {};
 
     constructor(private router: Router,
                 private activeRoute: ActivatedRoute,
-                private testResultService: TestResultService,
-                private location: Location) {
+                private location: Location,
+                private signalRService: SignalRService) {
         this.settings = {
-            testResultDetailId: 'Id',
+            id: 'Id',
             uri: 'Uri',
             responseTime: 'Response time',
             minResponseTime: 'Min. response time',
             maxResponseTime: 'Max. response time',
             meanResponseTime: 'Mean response time'
         };
+        this.formatColumns.responseTime =
+        this.formatColumns.minResponseTime =
+        this.formatColumns.maxResponseTime =
+        this.formatColumns.meanResponseTime = (val) => `${val} ms`;
     }
 
     ngOnInit() {

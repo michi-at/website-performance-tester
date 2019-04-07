@@ -5,5 +5,8 @@
     </div>
   </div>
   
-  <app-data-table [data]="data" [propertyTitles]="settings" (rowSelected)="onSelect($event)" [canSelect]="true"></app-data-table>
+  <app-data-table [data]="testResults" [propertyTitles]="settings"
+                  [canSelect]="true" (rowSelected)="onSelect($event)"
+                  [formatColumns]="formatColumns">
+  </app-data-table>
 </div>

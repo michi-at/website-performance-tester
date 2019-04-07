@@ -4,6 +4,7 @@ using Autofac.Integration.SignalR;
 using Autofac;
 using Microsoft.AspNet.SignalR;
 using Microsoft.Owin;
+using Microsoft.Owin.Cors;
 using Owin;
 using WebApp.IoC;
 
@@ -22,6 +23,8 @@ namespace WebApp
                 Resolver = AutofacConfiguration.Container.Resolve<IDependencyResolver>(),
             };
             ConfigureSignalR(app, config);
+            CorsOptions opt = CorsOptions.AllowAll;
+            app.UseCors(opt);
         }
     }
 }

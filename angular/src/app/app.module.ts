@@ -23,7 +23,7 @@ import { TestResultDetailsComponent } from './components/test-result-details/tes
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UIModule
+    UIModule,
   ],
   providers: [CustomBreakPointsProvider],
   bootstrap: [AppComponent]

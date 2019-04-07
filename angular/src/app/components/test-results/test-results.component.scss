@@ -2,6 +2,15 @@
 
 :host {
     @extend .defaultHost;
+
+    &::ng-deep {
+      .done {
+        color: map-get($green-palette, 300);
+      }
+      .hourglass_empty {
+        color: map-get($yellow-palette, 900);
+      }
+    }
 }
 
 .container {

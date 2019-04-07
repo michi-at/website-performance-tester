@@ -10,7 +10,7 @@ namespace WebApp
         [HubMethodName("NewMessage")]
         public void NewMessage(dynamic message)
         {
-            Clients.All.update(message);
+            Clients.All.message(message);
         }
     }
 }

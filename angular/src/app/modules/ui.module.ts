@@ -16,11 +16,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { DataTableComponent } from '../components/data-table/data-table.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { BarChartComponent } from '../components/bar-chart/bar-chart.component';
+import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
 
 @NgModule({
     declarations: [
         HeaderComponent,
         DataTableComponent,
+        BarChartComponent,
+        SanitizeHtmlPipe,
     ],
     imports: [
         BrowserAnimationsModule,
@@ -53,6 +57,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
         MatListModule,
         DataTableComponent,
         GoogleChartsModule,
+        BarChartComponent,
+        SanitizeHtmlPipe,
     ]
 })
 export class UIModule { }

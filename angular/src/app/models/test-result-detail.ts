@@ -1,5 +1,5 @@
 export class TestResultDetail {
-    testResultDetailId: number;
+    id: number;
     uri: string;
     responseTime: number;
     minResponseTime: number;

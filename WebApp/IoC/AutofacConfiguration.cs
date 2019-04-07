@@ -4,6 +4,9 @@ using Autofac.Integration.SignalR;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Infrastructure;
 using System.Reflection;
+using Autofac.Integration.WebApi;
+using Core.Concrete;
+using Core.Abstract;
 
 namespace WebApp.IoC
 {
@@ -17,6 +20,7 @@ namespace WebApp.IoC
             builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             RegisterBindings();
 
@@ -25,7 +29,8 @@ namespace WebApp.IoC
 
         private static void RegisterBindings()
         {
-            //builder.Register((context, parameters) => new TestResultRepository(new TestContext())).As<ITestResultRepository>();
+            builder.Register(x => new TaskGuard()).As<ITaskGuard>().SingleInstance();
+            builder.Register((context, parameters) => new TestResultRepository(new TestContext())).As<ITestResultRepository>();
             builder.RegisterType<Autofac.Integration.SignalR.AutofacDependencyResolver>().As<IDependencyResolver>()
                                                                                          .SingleInstance();
             builder.RegisterType<ConnectionManager>().As<IConnectionManager>()

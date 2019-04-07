@@ -15,8 +15,6 @@ namespace WebApp.Controllers
         private IConnectionManager manager;
         private IHubContext hubContext;
 
-        private const string jsonContentType = "application/json";
-
         public HomeController(IConnectionManager manager)
         {
             this.manager = manager;
@@ -32,8 +30,8 @@ namespace WebApp.Controllers
         public ActionResult Index(string uri)
         {
             var test = new {message = "test message"};
-            hubContext.Clients.All.update(test);
-            return Content(JsonConvert.SerializeObject(test), jsonContentType);
+            hubContext.Clients.All.message(test);
+            return Content(JsonConvert.SerializeObject(test), AppUtils.JsonContentType);
         }
     }
 }

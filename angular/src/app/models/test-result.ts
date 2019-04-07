@@ -1,20 +1,21 @@
-import { TestResultDetail } from './test-result-detail';
-
 export class TestResult {
-    testResultId: number;
+    id: number;
     authority: string;
+    status: number;
     testDate: Date;
     minResponseTime: number;
     maxResponseTime: number;
     meanResponseTime: number;
 
     constructor(obj: any) {
-        const { testResultId, authority, testDate, minResponseTime, maxResponseTime, meanResponseTime } = obj;
-        this.testResultId = testResultId;
-        this.authority = authority;
-        this.testDate = testDate;
-        this.minResponseTime = minResponseTime;
-        this.maxResponseTime = maxResponseTime;
-        this.meanResponseTime = meanResponseTime;
+        const { id, authority, status, testDate, minResponseTime, maxResponseTime, meanResponseTime } = obj;
+        const { Id, Authority, Status, TestDate, MinResponseTime, MaxResponseTime, MeanResponseTime } = obj;
+        this.id = id || Id;
+        this.authority = authority || Authority;
+        this.status = status || Status;
+        this.testDate = new Date(testDate || TestDate);
+        this.minResponseTime = minResponseTime || MinResponseTime;
+        this.maxResponseTime = maxResponseTime || MaxResponseTime;
+        this.meanResponseTime = meanResponseTime || MeanResponseTime;
     }
 }

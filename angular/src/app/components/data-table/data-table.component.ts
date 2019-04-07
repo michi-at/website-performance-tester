@@ -11,6 +11,7 @@ export class DataTableComponent implements OnInit {
     @Input() data: any[];
     @Input() propertyTitles: { [propertyName: string]: string };
     @Input() canSelect = false;
+    @Input() formatColumns: { [columnName: string]: (value: any) => string } = {};
     @Output() rowSelected = new EventEmitter<MatRow>();
 
     public columns: string[];
