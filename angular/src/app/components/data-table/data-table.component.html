@@ -1,4 +1,4 @@
-<div *ngIf="data" class="container">
+<div *ngIf="data" class="container" (document:click)="onClickOutside($event)">
   <table mat-table [dataSource]="data" class="mat-elevation-z8" color="accent">
 
     <ng-container [matColumnDef]="column" *ngFor="let column of columns">
@@ -10,7 +10,8 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns;" (click)="onSelect(row)"
-        [class.selected]="selectedRow && (row === selectedRow)"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns;" (click)="onSelect($event, row)"
+        [class.selected]="selection.isSelected(row)"
+        [class.canSelect]="canSelect"></tr>
   </table>
 </div>

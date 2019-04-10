@@ -8,7 +8,7 @@ import { TestResultDetailsResolverService } from './services/test-result-details
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'results', component: TestResultsComponent },
-  { path: 'details/:id', component: TestResultDetailsComponent,
+  { path: 'results/:id/details', component: TestResultDetailsComponent,
     resolve: { details: TestResultDetailsResolverService } },
   { path: '**', redirectTo: '' }
 ];

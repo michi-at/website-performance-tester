@@ -14,7 +14,7 @@ import { TestResultDetail } from '../models/test-result-detail';
   providedIn: 'root',
 })
 export class TestResultDetailsResolverService implements Resolve<TestResultDetail[]> {
-  constructor(private trs: TestResultService, private router: Router) {}
+  constructor(private trs: TestResultService, private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<TestResultDetail[]>
                                                                       | Observable<never> {

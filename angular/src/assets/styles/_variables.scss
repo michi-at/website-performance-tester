@@ -6,6 +6,8 @@ $green-palette: mat-palette($mat-green);
 $red-palette: mat-palette($mat-red);
 $yellow-palette: mat-palette($mat-yellow);
 
+$globalPadding: 15px;
+
 .defaultHost {
     display: block;
     width: 100%;
@@ -14,7 +16,7 @@ $yellow-palette: mat-palette($mat-yellow);
 
 .defaultContainer {
     width: 100%;
-    padding: 15px 15px;
+    padding: $globalPadding;
     > * {
         width: 100%;
     }

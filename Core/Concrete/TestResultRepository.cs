@@ -81,17 +81,45 @@ namespace Core.Concrete
 
         public IList<TestResultDetail> GetResultDetails(int resultId)
         {
-            return context.TestResultDetails.Where(x => x.TestResult.Id == resultId).ToList();
+            return context.TestResultDetails.Include(x => x.TestResult).Where(x => x.TestResult.Id == resultId).ToList();
         }
 
         public async Task<IList<TestResultDetail>> GetResultDetailsAsync(int resultId)
         {
-            return await context.TestResultDetails.Where(x => x.TestResult.Id == resultId).ToListAsync();
+            return await context.TestResultDetails.Include(x => x.TestResult).Where(x => x.TestResult.Id == resultId).ToListAsync();
+        }
+
+        public TestResultDetail GetResultDetail(int resultId, int detailId)
+        {
+            return context.TestResultDetails.Include(x => x.TestResult)
+                .Where(x => x.TestResult.Id == resultId && x.Id == detailId).FirstOrDefault();
+        }
+
+
+        public async Task<TestResultDetail> GetResultDetailAsync(int resultId, int detailId)
+        {
+            return await context.TestResultDetails.Include(x => x.TestResult)
+                .Where(x => x.TestResult.Id == resultId && x.Id == detailId).FirstOrDefaultAsync();
         }
 
         public void Add(TestResult result)
         {
             context.TestResults.Add(result);
+        }
+
+        public void Add(TestResultDetail detail)
+        {
+            context.TestResultDetails.Add(detail);
+        }
+
+        public void AddRange(IEnumerable<TestResult> results)
+        {
+            context.TestResults.AddRange(results);
+        }
+
+        public void AddRange(IEnumerable<TestResultDetail> details)
+        {
+            context.TestResultDetails.AddRange(details);
         }
 
         public void Delete(int id)

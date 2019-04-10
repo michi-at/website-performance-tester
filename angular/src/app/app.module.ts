@@ -8,8 +8,9 @@ import { UIModule } from './modules/ui.module';
 import { TestResultsComponent } from './components/test-results/test-results.component';
 import { CustomBreakPointsProvider } from './helpers/custom-breakpoints';
 import { CustomShowHideDirective } from './directives/show-hide.directive';
-import { CustomNgClassDirective } from './directives/ng-class.directive';
+import { FlexLayoutClassDirective } from './directives/flex-layout-class.directive';
 import { TestResultDetailsComponent } from './components/test-result-details/test-result-details.component';
+import { TestControlComponent } from './components/test-control/test-control.component';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { TestResultDetailsComponent } from './components/test-result-details/tes
     HomeComponent,
     TestResultsComponent,
     TestResultDetailsComponent,
+    TestControlComponent,
     CustomShowHideDirective,
-    CustomNgClassDirective,
+    FlexLayoutClassDirective,
   ],
   imports: [
     BrowserModule,

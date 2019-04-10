@@ -1,0 +1,29 @@
+@import 'variables';
+
+:host {
+    @extend .defaultHost;
+
+    &::ng-deep {
+        .mat-select-value {
+            display: none;
+        }
+
+        .mat-select {
+            position: absolute;
+            top: -3px;
+        }
+
+        .mat-select-trigger {
+            width: 100%;
+        }
+    }
+}
+
+.container {
+    @extend .defaultContainer;
+    padding: $globalPadding * 2;
+}
+
+.selected {
+    margin-left: 20px;
+}

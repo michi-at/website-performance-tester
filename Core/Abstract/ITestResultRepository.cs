@@ -24,7 +24,13 @@ namespace Core.Abstract
         IList<TestResultDetail> GetResultDetails(int testId);
         Task<IList<TestResultDetail>> GetResultDetailsAsync(int testId);
 
+        TestResultDetail GetResultDetail(int resultId, int detailId);
+        Task<TestResultDetail> GetResultDetailAsync(int resultId, int detailId);
+
         void Add(TestResult result);
+        void Add(TestResultDetail detail);
+        void AddRange(IEnumerable<TestResult> results);
+        void AddRange(IEnumerable<TestResultDetail> details);
 
         void Delete(int id);
         void Delete(string authority);

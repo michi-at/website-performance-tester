@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Core.Entities;
+
+namespace Core
+{
+    public class TestResultArgs : EventArgs
+    {
+        public TestResult TestResult { get; }
+
+        public TestResultArgs(TestResult result)
+        {
+            TestResult = result;
+        }
+    }
+}

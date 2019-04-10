@@ -12,6 +12,12 @@ namespace WebApp
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "Details",
+                routeTemplate: "api/Results/{id}/Details/{param}",
+                defaults: new { controller = "Details", param = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

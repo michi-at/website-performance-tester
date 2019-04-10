@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 
 interface AppInfo {
-    readonly rootPath: string;
+    readonly apiRootPath: string;
     readonly apiPath: string;
-    readonly signalRPath: string;
-    readonly hubName: string;
+    readonly apiResultsPath: string;
+    readonly apiDetails: (id: string | number) => string;
+    readonly apiSignalRPath: string;
+    readonly apiHubName: string;
+
+    readonly routes: {
+        readonly root: string;
+        readonly results: string;
+        readonly details: (id: string | number) => string;
+    };
 }
 
 @Injectable({
@@ -14,14 +22,27 @@ export class AppConfigService {
     private config: AppInfo;
 
     constructor() {
-        const rootPath = 'http://localhost';
-        const apiPath = `${rootPath}/api`;
-        const signalRPath = `${rootPath}/signalr`;
+        const apiRootPath = 'http://localhost';
+        const apiPath = `${apiRootPath}/api`;
+        const apiResultsPath = `${apiPath}/results`;
+        const apiDetails = (id: string | number): string => `${apiResultsPath}/${id}/details`;
+        const apiSignalRPath = `${apiRootPath}/signalr`;
+
+        const results = 'results';
+        const details = (id: string | number) => `${results}/${id}/details`;
+
         this.config = {
-            rootPath,
+            apiRootPath,
             apiPath,
-            signalRPath,
-            hubName: 'mainHub'
+            apiResultsPath,
+            apiDetails,
+            apiSignalRPath,
+            apiHubName: 'mainHub',
+            routes: {
+                root: '',
+                results,
+                details,
+            }
         };
     }
 

@@ -14,6 +14,10 @@
   @extend .defaultContainer;
 }
 
+.button-back {
+  height: 42px;
+}
+
 @media only screen and (max-width: 599px) {
   :host {
     &::ng-deep {

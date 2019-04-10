@@ -17,6 +17,14 @@
     @extend .defaultContainer;
 }
 
+.header {
+  padding-left: $globalPadding;
+}
+
+.controls {
+  padding-right: $globalPadding;
+}
+
 @media only screen and (max-width: 599px) {
     :host {
       &::ng-deep {

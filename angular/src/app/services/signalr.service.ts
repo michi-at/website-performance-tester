@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppConfigService } from './app-config.service';
-import { fromEventPattern, Observable, Subject, ReplaySubject, BehaviorSubject } from 'rxjs';
+import { ReplaySubject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -19,8 +19,8 @@ export class SignalRService {
     }
 
     init() {
-        this.connection = $.hubConnection(this.settings.signalRPath, { useDefaultPath: false });
-        this.mainHub = this.connection.createHubProxy(this.settings.hubName);
+        this.connection = $.hubConnection(this.settings.apiSignalRPath, { useDefaultPath: false });
+        this.mainHub = this.connection.createHubProxy(this.settings.apiHubName);
 
         this.messageEventListener = this.broadcastMessage.bind(this);
         this.mainHub.on('message', this.messageEventListener);

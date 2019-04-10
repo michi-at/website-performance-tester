@@ -1,0 +1,12 @@
+<div class="container">
+    <mat-form-field color="accent">
+        <input matInput #input placeholder="Target uri" type="url" (keyup.enter)="submit()"
+               [formControl]="uriValidator" required>
+        <mat-error *ngIf="uriValidator.invalid">{{getErrorMessage()}}</mat-error>
+        <span matPrefix>
+            <mat-select [(value)]="protocol">
+                <mat-option value="https://">https://</mat-option>
+                <mat-option value="http://">http://</mat-option>
+            </mat-select><span style="display: inline-block" class="selected">{{protocol}}</span></span>
+    </mat-form-field>
+</div>

@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { TestResult } from 'src/app/models/test-result';
 import { MatRow } from '@angular/material';
 import { Router } from '@angular/router';
 import { TestResultService } from 'src/app/services/test-result.service';
 import { SignalRService } from 'src/app/services/signalr.service';
 import { Subscription } from 'rxjs';
+import { AppConfigService } from 'src/app/services/app-config.service';
 
 @Component({
     selector: 'app-test-results',
@@ -12,25 +13,31 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./test-results.component.scss']
 })
 
-export class TestResultsComponent implements OnInit {
+export class TestResultsComponent implements OnInit, OnDestroy {
+    @Input() selectedRow: MatRow;
     selectedResult: TestResult;
+
     testResults: TestResult[];
+    resultsSubscription: Subscription;
 
-    settings: { [k: string]: string };
+    tableSettings: { [k: string]: string };
     formatColumns: any = {};
-    public data: any[];
+    data: any[];
 
-    constructor(private router: Router,
+    private readonly settings = this.appConfig.settings;
+
+    constructor(private appConfig: AppConfigService,
+                private router: Router,
                 private testResultService: TestResultService,
                 private signalRService: SignalRService) {
-        this.settings = {
+        this.tableSettings = {
             id: 'Id',
             authority: 'Authority',
             minResponseTime: 'Min. response time',
             maxResponseTime: 'Max. response time',
             meanResponseTime: 'Mean response time',
             testDate: 'Date',
-            status: 'Status'
+            status: 'Status',
         };
         this.formatColumns.status = (val) => {
             let icon = '';
@@ -60,13 +67,22 @@ export class TestResultsComponent implements OnInit {
         this.getResults();
     }
 
-    getResults() {
-        this.testResultService.getResults()
-                              .subscribe(results => this.testResults = results);
+    ngOnDestroy() {
+        this.resultsSubscription.unsubscribe();
     }
 
-    onSelect(result: MatRow): void {
-        this.selectedResult = new TestResult(result);
-        this.router.navigate(['/details', this.selectedResult.id]);
+    getResults() {
+        this.resultsSubscription = this.testResultService.getResults().subscribe(data => {
+            this.testResults = data;
+        });
     }
-}
+
+    onSelect(row: MatRow): void {
+        this.selectedRow = row;
+        this.selectedResult = row && new TestResult(row);
+    }
+
+    onClickDetails() {
+        this.router.navigateByUrl(this.settings.routes.details(this.selectedResult.id));
+    }
+ }

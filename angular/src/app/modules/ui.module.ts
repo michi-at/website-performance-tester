@@ -9,11 +9,12 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatListModule,
+    MatSelectModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from '../layout/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTableComponent } from '../components/data-table/data-table.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BarChartComponent } from '../components/bar-chart/bar-chart.component';
@@ -40,6 +41,8 @@ import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
         FormsModule,
         MatListModule,
         GoogleChartsModule,
+        MatSelectModule,
+        ReactiveFormsModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -59,6 +62,8 @@ import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
         GoogleChartsModule,
         BarChartComponent,
         SanitizeHtmlPipe,
+        MatSelectModule,
+        ReactiveFormsModule,
     ]
 })
 export class UIModule { }

@@ -1,12 +1,19 @@
 <div class="container" fxLayoutAlign="center center" fxLayout="column" fxFlexAlign="center">
-  <div>
-    <h1 fxFlexAlign="start">History</h1>
-    <div *ngIf="selectedResult">Selected {{selectedResult.authority | uppercase}}
-    </div>
+  <div class="header">
+    <h1>History</h1>
   </div>
   
-  <app-data-table [data]="testResults" [propertyTitles]="settings"
-                  [canSelect]="true" (rowSelected)="onSelect($event)"
-                  [formatColumns]="formatColumns">
+  <app-data-table [data]="testResults" [propertyTitles]="tableSettings"
+                  [canSelect]="true"
+                  [formatColumns]="formatColumns"
+                  [exclude]="'button, span.mat-button-wrapper'"
+                  (rowSelected)="onSelect($event)">
   </app-data-table>
+  <div class="controls" fxLayout="column">
+      <button mat-flat-button fxFlexAlign="end" color="accent"
+        (click)="onClickDetails()"
+        [disabled]="selectedResult === undefined || selectedResult === null">
+          Details
+      </button>
+  </div>
 </div>

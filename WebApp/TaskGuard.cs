@@ -18,7 +18,7 @@ namespace WebApp
         {
             lock (tasks)
             {
-                if (tasks.Contains(id) || tasks.Count > 2)
+                if (tasks.Contains(id) || tasks.Count >= 2)
                 {
                     return false;
                 }

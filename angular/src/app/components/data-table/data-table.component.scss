@@ -3,8 +3,12 @@
 :host {
     @extend .defaultHost;
 }
+
 .hover {
     background-color: map-get($accent-palette, 100);
+}
+
+.canSelect {
     cursor: pointer;
 }
 
@@ -45,9 +49,5 @@ th.mat-header-cell {
 }
 
 .container {
-    width: 100%;
-    padding: 15px 15px;
-    > * {
-        width: 100%;
-    }
+    @extend .defaultContainer;
 }

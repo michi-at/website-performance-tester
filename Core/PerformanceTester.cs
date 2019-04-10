@@ -19,6 +19,9 @@ namespace Core
     public class PerformanceTester
     {
         public event EventHandler<PageTestingCompletedArgs> PageTestingCompleted;
+        public event EventHandler<TestResultArgs> RepositoryUpdateRequested;
+        public event EventHandler<TestResultArgs> RepositoryInsertRequested;
+        public event EventHandler<TestResultArgs> RepositoryInsertDetailsRequested;
 
         private TestResult result;
         private ConcurrentBag<TestResultDetail> resultDetails;
@@ -39,23 +42,24 @@ namespace Core
         private long rootMinResponseTime = long.MaxValue;
         private long rootMaxResponseTime = long.MinValue;
         private ConcurrentDictionary<string, byte> processedPages;
-        private object mainLock = new object();
+        private readonly object mainLock = new object();
 
-        public async Task<TestResult> Start(Uri targetUri, int id = 0)
+        public async Task Start(Uri targetUri)
         {
             if (!(await IsRemoteServerAlive(targetUri)))
             {
-                throw new WebException("No response from server");
+                throw new WebException("No response from external server");
             }
 
             resultDetails = new ConcurrentBag<TestResultDetail>();
             processedPages = new ConcurrentDictionary<string, byte>();
             result = new TestResult()
             {
-                Id = id,
                 Authority = targetUri.Authority,
                 TestDate = DateTime.Now,
+                Status = 1
             };
+            RepositoryInsertRequested?.Invoke(this, new TestResultArgs(result));
 
             CrawlConfiguration configuration = new CrawlConfiguration()
             {
@@ -91,8 +95,9 @@ namespace Core
             result.MinResponseTime = rootMinResponseTime;
             result.MaxResponseTime = rootMaxResponseTime;
             result.MeanResponseTime = rootMeanResponseTime / numberOfPagesCrawled;
+            result.Status = 0;
 
-            return result;
+            RepositoryInsertDetailsRequested?.Invoke(this, new TestResultArgs(result));
         }
 
         private async Task<bool> IsRemoteServerAlive(Uri uri)
@@ -114,8 +119,6 @@ namespace Core
 
         public void Start(TestResult root)
         {
-            root.TestDate = DateTime.Now;
-
             using (HttpClient client = new HttpClient())
             {
                 var testBlock = new ActionBlock<TestResultDetail>(async item =>
@@ -162,12 +165,19 @@ namespace Core
                 }
 
                 testBlock.Complete();
+                
+                root.TestDate = DateTime.Now;
+                root.Status = 1;
+                RepositoryUpdateRequested?.Invoke(this, new TestResultArgs(root));
+
                 testBlock.Completion.Wait();
             }
 
             root.MinResponseTime = rootMinResponseTime;
             root.MaxResponseTime = rootMaxResponseTime;
             root.MeanResponseTime = rootMeanResponseTime / root.TestResultDetails.Count;
+            root.Status = 0;
+            RepositoryUpdateRequested?.Invoke(this, new TestResultArgs(root));
         }
 
         private void ProcessItem(TestResultDetail item, long responseTime)
