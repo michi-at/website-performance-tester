@@ -1,5 +1,6 @@
 # Performance Tester
-Angular 7 + ASP.NET MVC 5 app that measures the response time of websites
+Angular 7 + ASP.NET MVC 5 app that measures the response time of websites  
+[Test task](TASK.md)
 
 ## List of used technologies
 ### Frontend
@@ -17,4 +18,5 @@ Angular 7 + ASP.NET MVC 5 app that measures the response time of websites
 - Entity Framework 6 Code-First
 - IIS with WebSocket
 - MS SQL Server 2017
+- OWIN
 - SignalR
