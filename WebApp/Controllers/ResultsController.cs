@@ -52,10 +52,10 @@ namespace WebApp.Controllers
             return Json(result);
         }
 
-        // GET: api/Results?authority=string
-        public IHttpActionResult Get(string authority)
+        // GET: api/Results?absoluteUri=string
+        public IHttpActionResult Get(string absoluteUri)
         {
-            var result = repository.GetResult(authority);
+            var result = repository.GetResult(absoluteUri);
             if (result == null)
             {
                 return NotFound();
@@ -72,8 +72,8 @@ namespace WebApp.Controllers
                 uri = new Uri(value);
                 IHttpActionResult response;
 
-                var result = repository.GetResultWithDetails(uri.Authority);
-                if (!taskGuard.AddTask(uri.Authority))
+                var result = repository.GetResultWithDetails(uri.AbsoluteUri);
+                if (!taskGuard.AddTask(uri.AbsoluteUri))
                 {
                     return this.Status((int) HttpStatusCode.ServiceUnavailable,
                         "Server is busy");
@@ -104,7 +104,7 @@ namespace WebApp.Controllers
             {
                 if (uri != null)
                 {
-                    taskGuard.RemoveTask(uri.Authority);
+                    taskGuard.RemoveTask(uri.AbsoluteUri);
                 }
             }
         }
@@ -140,11 +140,10 @@ namespace WebApp.Controllers
         private void InitTester()
         {
             pt = new PerformanceTester();
-            pt.PageTestingCompleted += (sender, args) =>
-            {
-                var resultDetail = args.ResultDetail;
-                hubContext.Clients.All.message(new TestResultDetailDTO(resultDetail));
-            };
+
+            pt.TestStarted += PerformanceTester_OnTest;
+            pt.TestFinished += PerformanceTester_OnTest;
+
             pt.RepositoryUpdateRequested += (sender, args) =>
             {
                 repository.Update(args.TestResult);
@@ -162,5 +161,9 @@ namespace WebApp.Controllers
             };
         }
 
+        private void PerformanceTester_OnTest(object sender, TestResultArgs e)
+        {
+            hubContext.Clients.All.message(new TestResultDTO(e.TestResult));
+        }
     }
 }

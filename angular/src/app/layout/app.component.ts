@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SignalRService } from '../services/signalr.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +6,5 @@ import { SignalRService } from '../services/signalr.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private signalRService: SignalRService) { }
+  constructor() { }
 }

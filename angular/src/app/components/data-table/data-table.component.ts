@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { MatRow } from '@angular/material';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { MatRow, MatTable } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -14,6 +14,9 @@ export class DataTableComponent<T> implements OnInit {
     @Input() canSelect = false;
     @Input() formatColumns: { [columnName: string]: (value: any) => string } = {};
     @Input() exclude: string;
+    @Input() isLoading = true;
+    @ViewChild('table') table: MatTable<T>;
+
     @Output() rowSelected = new EventEmitter<MatRow>();
 
     columns: string[];
@@ -30,7 +33,7 @@ export class DataTableComponent<T> implements OnInit {
 
     onSelect(event: Event, row: MatRow) {
         if (this.canSelect) {
-            this.selection.toggle(row);
+            this.selection.select(row);
             this.rowSelected.emit(row);
             event.stopPropagation();
         }
@@ -43,6 +46,10 @@ export class DataTableComponent<T> implements OnInit {
                 this.clearSelection();
             }
         }
+    }
+
+    renderRows() {
+        this.table.renderRows();
     }
 
     private clearSelection() {

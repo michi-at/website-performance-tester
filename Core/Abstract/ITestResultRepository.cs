@@ -13,13 +13,13 @@ namespace Core.Abstract
         Task<IList<TestResult>> GetResultsWithDetailsAsync();
 
         TestResult GetResult(int id);
-        TestResult GetResult(string authority);
+        TestResult GetResult(string absoluteUri);
         TestResult GetResultWithDetails(int id);
-        TestResult GetResultWithDetails(string authority);
+        TestResult GetResultWithDetails(string absoluteUri);
         Task<TestResult> GetResultAsync(int id);
-        Task<TestResult> GetResultAsync(string authority);
+        Task<TestResult> GetResultAsync(string absoluteUri);
         Task<TestResult> GetResultWithDetailsAsync(int id);
-        Task<TestResult> GetResultWithDetailsAsync(string authority);
+        Task<TestResult> GetResultWithDetailsAsync(string absoluteUri);
 
         IList<TestResultDetail> GetResultDetails(int testId);
         Task<IList<TestResultDetail>> GetResultDetailsAsync(int testId);
@@ -33,7 +33,7 @@ namespace Core.Abstract
         void AddRange(IEnumerable<TestResultDetail> details);
 
         void Delete(int id);
-        void Delete(string authority);
+        void Delete(string absoluteUri);
 
         void Update(TestResult result);
 

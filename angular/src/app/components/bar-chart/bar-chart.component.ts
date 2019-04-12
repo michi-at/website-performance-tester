@@ -12,7 +12,6 @@ import { GoogleChartComponent, ScriptLoaderService } from 'angular-google-charts
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BarChartComponent extends GoogleChartComponent {
-
     constructor(element: ElementRef, loaderService: ScriptLoaderService) {
         super(element, loaderService);
     }

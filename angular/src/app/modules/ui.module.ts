@@ -10,6 +10,8 @@ import {
     MatPaginatorModule,
     MatListModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from '../layout/header/header.component';
@@ -19,6 +21,7 @@ import { DataTableComponent } from '../components/data-table/data-table.componen
 import { GoogleChartsModule } from 'angular-google-charts';
 import { BarChartComponent } from '../components/bar-chart/bar-chart.component';
 import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
     declarations: [
@@ -28,6 +31,7 @@ import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
         SanitizeHtmlPipe,
     ],
     imports: [
+        AppRoutingModule,
         BrowserAnimationsModule,
         MatButtonModule,
         MatInputModule,
@@ -43,6 +47,8 @@ import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
         GoogleChartsModule,
         MatSelectModule,
         ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
     ],
     exports: [
         BrowserAnimationsModule,
@@ -64,6 +70,8 @@ import { SanitizeHtmlPipe } from '../helpers/sanitize-html.pipe';
         SanitizeHtmlPipe,
         MatSelectModule,
         ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        MatCardModule,
     ]
 })
 export class UIModule { }

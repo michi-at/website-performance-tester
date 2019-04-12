@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AppConfigService } from './app-config.service';
-import { ReplaySubject, BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +11,8 @@ export class SignalRService {
     private mainHub: SignalR.Hub.Proxy;
     private messageEventListener;
 
-    public onMessage: BehaviorSubject<any>;
-    public onReady = new ReplaySubject();
+    private broadcastSource = new Subject<any>();
+    onResultMessage$ = this.broadcastSource.asObservable();
 
     constructor(private appConfig: AppConfigService) {
         this.init();
@@ -26,8 +26,8 @@ export class SignalRService {
         this.mainHub.on('message', this.messageEventListener);
 
         this.connection.start()
-                       .done(() => { console.log('Connected.'); this.onReady.next(); })
-                       .fail((error) => console.log('Fail: ', error));
+            .done(() => { console.log('Connected.'); })
+            .fail((error) => console.log('Fail: ', error));
     }
 
     invoke(methodName: string, data: any) {
@@ -35,5 +35,6 @@ export class SignalRService {
     }
 
     private broadcastMessage(msg: any) {
+        this.broadcastSource.next(msg);
     }
 }

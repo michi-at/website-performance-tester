@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { TestResultsComponent } from './components/test-results/test-results.component';
 import { TestResultDetailsComponent } from './components/test-result-details/test-result-details.component';
+import { TestResultsComponent } from './components/test-results/test-results.component';
 import { TestResultDetailsResolverService } from './services/test-result-details-resolver.service';
 
-const routes: Routes = [
+const ROUTES: Routes = [
   { path: '', component: HomeComponent },
   { path: 'results', component: TestResultsComponent },
   { path: 'results/:id/details', component: TestResultDetailsComponent,
@@ -14,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(ROUTES, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,17 +1,23 @@
-<div *ngIf="data" class="container" (document:click)="onClickOutside($event)">
-  <table mat-table [dataSource]="data" class="mat-elevation-z8" color="accent">
+<div class="container" (document:click)="onClickOutside($event)">
+  <table mat-table #table [dataSource]="data" class="mat-elevation-z8" color="accent">
 
     <ng-container [matColumnDef]="column" *ngFor="let column of columns">
       <th mat-header-cell *matHeaderCellDef> {{ propertyTitles[column] }} </th>
-      <td mat-cell *matCellDef="let element" [innerHtml]="
-        (formatColumns[column] ? formatColumns[column](element[column])
-                               : element[column]) | sanitizeHtml">
+      <td mat-cell *matCellDef="let element"
+          [attr.aria-label]="element[column]"
+          [attr.title]="element[column]"
+          [innerHtml]="
+                       (formatColumns[column] ? formatColumns[column](element[column])
+                                              : element[column]) | sanitizeHtml">
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns;" (click)="onSelect($event, row)"
-        [class.selected]="selection.isSelected(row)"
-        [class.canSelect]="canSelect"></tr>
+      [class.selected]="selection.isSelected(row)" [class.canSelect]="canSelect"></tr>
   </table>
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
 </div>

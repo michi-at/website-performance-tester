@@ -10,12 +10,20 @@ export class TestResult {
     constructor(obj: any) {
         const { id, authority, status, testDate, minResponseTime, maxResponseTime, meanResponseTime } = obj;
         const { Id, Authority, Status, TestDate, MinResponseTime, MaxResponseTime, MeanResponseTime } = obj;
-        this.id = id || Id;
+        this.id = this.isDefined(id) ? id : Id;
         this.authority = authority || Authority;
-        this.status = status || Status;
+        this.status = this.isDefined(status) ? status : Status;
         this.testDate = new Date(testDate || TestDate);
-        this.minResponseTime = minResponseTime || MinResponseTime;
-        this.maxResponseTime = maxResponseTime || MaxResponseTime;
-        this.meanResponseTime = meanResponseTime || MeanResponseTime;
+        this.minResponseTime = this.isDefined(minResponseTime) ? minResponseTime : MinResponseTime;
+        this.maxResponseTime = this.isDefined(maxResponseTime) ? maxResponseTime : MaxResponseTime;
+        this.meanResponseTime = this.isDefined(meanResponseTime) ? meanResponseTime : MeanResponseTime;
+    }
+
+    private isDefined(value: any) {
+        if (value !== undefined && value !== null) {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -23,8 +23,8 @@ import { TestControlComponent } from './components/test-control/test-control.com
     FlexLayoutClassDirective,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     UIModule,
   ],
   providers: [CustomBreakPointsProvider],

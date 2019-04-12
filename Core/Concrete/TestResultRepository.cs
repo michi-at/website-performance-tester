@@ -44,9 +44,9 @@ namespace Core.Concrete
             return context.TestResults.Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public TestResult GetResult(string authority)
+        public TestResult GetResult(string absoluteUri)
         {
-            return context.TestResults.Where(x => x.Authority == authority).FirstOrDefault();
+            return context.TestResults.Where(x => x.Authority == absoluteUri).FirstOrDefault();
         }
 
         public TestResult GetResultWithDetails(int id)
@@ -54,9 +54,9 @@ namespace Core.Concrete
             return context.TestResults.Include(x => x.TestResultDetails).Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public TestResult GetResultWithDetails(string authority)
+        public TestResult GetResultWithDetails(string absoluteUri)
         {
-            return context.TestResults.Include(x => x.TestResultDetails).Where(x => x.Authority == authority).FirstOrDefault();
+            return context.TestResults.Include(x => x.TestResultDetails).Where(x => x.Authority == absoluteUri).FirstOrDefault();
         }
 
         public async Task<TestResult> GetResultAsync(int id)
@@ -64,9 +64,9 @@ namespace Core.Concrete
             return await context.TestResults.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<TestResult> GetResultAsync(string authority)
+        public async Task<TestResult> GetResultAsync(string absoluteUri)
         {
-            return await context.TestResults.Where(x => x.Authority == authority).FirstOrDefaultAsync();
+            return await context.TestResults.Where(x => x.Authority == absoluteUri).FirstOrDefaultAsync();
         }
 
         public async Task<TestResult> GetResultWithDetailsAsync(int id)
@@ -74,9 +74,9 @@ namespace Core.Concrete
             return await context.TestResults.Include(x => x.TestResultDetails).Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<TestResult> GetResultWithDetailsAsync(string authority)
+        public async Task<TestResult> GetResultWithDetailsAsync(string absoluteUri)
         {
-            return await context.TestResults.Include(x => x.TestResultDetails).Where(x => x.Authority == authority).FirstOrDefaultAsync();
+            return await context.TestResults.Include(x => x.TestResultDetails).Where(x => x.Authority == absoluteUri).FirstOrDefaultAsync();
         }
 
         public IList<TestResultDetail> GetResultDetails(int resultId)
@@ -128,9 +128,9 @@ namespace Core.Concrete
             context.TestResults.Remove(result);
         }
 
-        public void Delete(string authority)
+        public void Delete(string absoluteUri)
         {
-            var result = GetResult(authority);
+            var result = GetResult(absoluteUri);
             context.TestResults.Remove(result);
         }
 

@@ -6,12 +6,13 @@
   <div style="overflow-y: auto; max-height: 400px; min-height: 0; width: 100%; ">
     <div style="overflow: hidden;">
       <app-bar-chart fxHide.xs
-                    #chart [type]="'Bar'" [data]="data" [dynamicResize]="true" [options]="chartOptions"
+                    #chart [type]="'BarChart'" [data]="data" [dynamicResize]="true" [options]="chartOptions"
                     style="width: 98%;" [columnNames]="columnNames">
       </app-bar-chart>
     </div>
   </div>
   <app-data-table [data]="resultDetails" [propertyTitles]="tableSettings"
+                  [isLoading]="isLoading"
                   [formatColumns]="formatColumns">
   </app-data-table>
 </div>

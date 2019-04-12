@@ -1,20 +1,51 @@
 @import 'variables';
 
 :host {
-    @extend .defaultHost;
+  @extend .defaultHost;
 
-    &::ng-deep {
-      .done {
-        color: map-get($green-palette, 300);
-      }
-      .hourglass_empty {
-        color: map-get($yellow-palette, 900);
+  &::ng-deep {
+    .done {
+      color: map-get($green-palette, 300);
+    }
+
+    .hourglass_empty {
+      color: map-get($yellow-palette, 900);
+      position: relative;
+      top: 3px;
+      animation: progress 2s infinite;
+      animation-timing-function: ease;
+    }
+
+    tr.selected {
+      .hourglass_empty, .done {
+        color: map-get($primary-palette, 700);
       }
     }
+
+    tr:hover {
+      .hourglass_empty, .done {
+        color: map-get($primary-palette, 500);
+      }
+    }
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .container {
-    @extend .defaultContainer;
+  @extend .defaultContainer;
 }
 
 .header {
@@ -23,32 +54,36 @@
 
 .controls {
   padding-right: $globalPadding;
+
+  button:not(:last-child) {
+    margin-right: 10px;
+  }
 }
 
 @media only screen and (max-width: 599px) {
-    :host {
-      &::ng-deep {
-  
-        .mat-header-cell:first-child,
-        .mat-header-cell:nth-child(6),
-        .mat-row .mat-cell:first-child,
-        .mat-row .mat-cell:nth-child(6) {
-          display: none;
-        }
+  :host {
+    &::ng-deep {
+
+      .mat-header-cell:first-child,
+      .mat-header-cell:nth-child(6),
+      .mat-row .mat-cell:first-child,
+      .mat-row .mat-cell:nth-child(6) {
+        display: none;
       }
     }
   }
-  
-  @media only screen and (max-width: 440px) {
-    :host {
-      &::ng-deep {
-  
-        .mat-header-cell:nth-child(3),
-        .mat-header-cell:nth-child(4),
-        .mat-row .mat-cell:nth-child(3),
-        .mat-row .mat-cell:nth-child(4) {
-          display: none;
-        }
+}
+
+@media only screen and (max-width: 440px) {
+  :host {
+    &::ng-deep {
+
+      .mat-header-cell:nth-child(3),
+      .mat-header-cell:nth-child(4),
+      .mat-row .mat-cell:nth-child(3),
+      .mat-row .mat-cell:nth-child(4) {
+        display: none;
       }
     }
   }
+}

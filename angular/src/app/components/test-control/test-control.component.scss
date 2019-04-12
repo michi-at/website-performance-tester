@@ -22,8 +22,27 @@
 .container {
     @extend .defaultContainer;
     padding: $globalPadding * 2;
+
+    mat-form-field {
+        padding: $globalPadding;
+    }
 }
 
 .selected {
     margin-left: 20px;
+}
+
+.test-button {
+    margin-bottom: 16px !important;
+    padding: 0 40px;
+    color: #fff;
+    background-color: map-get($red-palette, 600);
+
+    &.isValid {
+        background-color: map-get($green-palette, 400);
+    }
+}
+
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+    margin-bottom: 0;
 }

@@ -1,0 +1,23 @@
+@import '~@angular/material/theming';
+
+$primary-palette: mat-palette($mat-indigo);
+$accent-palette: mat-palette($mat-pink);
+$green-palette: mat-palette($mat-green);
+$red-palette: mat-palette($mat-red);
+$yellow-palette: mat-palette($mat-yellow);
+
+$globalPadding: 15px;
+
+.defaultHost {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.defaultContainer {
+    width: 100%;
+    padding: $globalPadding;
+    > * {
+        width: 100%;
+    }
+}

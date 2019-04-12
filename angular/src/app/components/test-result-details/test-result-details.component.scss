@@ -7,6 +7,23 @@
     app-bar-chart {
       min-width: 98%;
     }
+
+    th {
+      white-space: nowrap;
+    }
+
+    .truncate {
+      display: inline-table;
+      table-layout: fixed;
+      width: 100%;
+      
+      span.truncated {
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: block;
+      }
+    }
   }
 }
 
@@ -16,6 +33,16 @@
 
 .button-back {
   height: 42px;
+}
+
+@media only screen and (max-width: 960px) {
+  :host {
+    &::ng-deep {
+      th {
+        white-space: normal;
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 599px) {

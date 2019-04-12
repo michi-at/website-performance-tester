@@ -19,6 +19,10 @@ namespace Core
     public class PerformanceTester
     {
         public event EventHandler<PageTestingCompletedArgs> PageTestingCompleted;
+
+        public event EventHandler<TestResultArgs> TestStarted;
+        public event EventHandler<TestResultArgs> TestFinished;
+
         public event EventHandler<TestResultArgs> RepositoryUpdateRequested;
         public event EventHandler<TestResultArgs> RepositoryInsertRequested;
         public event EventHandler<TestResultArgs> RepositoryInsertDetailsRequested;
@@ -55,7 +59,7 @@ namespace Core
             processedPages = new ConcurrentDictionary<string, byte>();
             result = new TestResult()
             {
-                Authority = targetUri.Authority,
+                Authority = targetUri.AbsoluteUri,
                 TestDate = DateTime.Now,
                 Status = 1
             };
@@ -89,6 +93,7 @@ namespace Core
                 return decision;
             });
 
+            TestStarted?.Invoke(this, new TestResultArgs(result));
             crawler.Crawl(targetUri);
 
             result.TestResultDetails = resultDetails.ToList();
@@ -97,6 +102,7 @@ namespace Core
             result.MeanResponseTime = rootMeanResponseTime / numberOfPagesCrawled;
             result.Status = 0;
 
+            TestFinished?.Invoke(this, new TestResultArgs(result));
             RepositoryInsertDetailsRequested?.Invoke(this, new TestResultArgs(result));
         }
 
@@ -169,6 +175,7 @@ namespace Core
                 root.TestDate = DateTime.Now;
                 root.Status = 1;
                 RepositoryUpdateRequested?.Invoke(this, new TestResultArgs(root));
+                TestStarted?.Invoke(this, new TestResultArgs(root));
 
                 testBlock.Completion.Wait();
             }
@@ -177,6 +184,8 @@ namespace Core
             root.MaxResponseTime = rootMaxResponseTime;
             root.MeanResponseTime = rootMeanResponseTime / root.TestResultDetails.Count;
             root.Status = 0;
+
+            TestFinished?.Invoke(this, new TestResultArgs(root));
             RepositoryUpdateRequested?.Invoke(this, new TestResultArgs(root));
         }
 

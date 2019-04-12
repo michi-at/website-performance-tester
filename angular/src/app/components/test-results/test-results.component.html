@@ -1,19 +1,21 @@
 <div class="container" fxLayoutAlign="center center" fxLayout="column" fxFlexAlign="center">
   <div class="header">
-    <h1>History</h1>
+    <h1 style="margin: 0;">History</h1>
   </div>
-  
-  <app-data-table [data]="testResults" [propertyTitles]="tableSettings"
-                  [canSelect]="true"
-                  [formatColumns]="formatColumns"
-                  [exclude]="'button, span.mat-button-wrapper'"
-                  (rowSelected)="onSelect($event)">
+
+  <app-data-table #table [data]="testResults" [propertyTitles]="tableSettings" [canSelect]="true"
+    [formatColumns]="formatColumns" [exclude]="'button, span.mat-button-wrapper, mat-icon'" [isLoading]="isLoading"
+    (rowSelected)="onSelect($event)">
   </app-data-table>
-  <div class="controls" fxLayout="column">
-      <button mat-flat-button fxFlexAlign="end" color="accent"
-        (click)="onClickDetails()"
-        [disabled]="selectedResult === undefined || selectedResult === null">
-          Details
-      </button>
+  <div class="controls" fxLayout="row">
+    <span style="flex: 1 1 auto;"></span>
+    <button mat-flat-button color="primary" (click)="onClickRepeat()"
+      [disabled]="selectedResult === undefined || selectedResult === null || selectedResult.status !== 0">
+      <mat-icon>repeat</mat-icon>
+    </button>
+    <button mat-flat-button color="accent" (click)="onClickDetails()"
+      [disabled]="selectedResult === undefined || selectedResult === null || selectedResult.status !== 0">
+      Details
+    </button>
   </div>
 </div>
