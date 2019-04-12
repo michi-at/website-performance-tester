@@ -1,8 +1,8 @@
 # Performance Tester
 Angular 7 + ASP.NET MVC 5 app that measures the response time of websites
 
-*List of used technologies*:
-## Frontend
+## List of used technologies
+### Frontend
 - Angular 7
 - Angular Material
 - Angular Flex-Layout
@@ -10,7 +10,7 @@ Angular 7 + ASP.NET MVC 5 app that measures the response time of websites
 - [CSS Animation Sync](https://github.com/bealearts/css-animation-sync)
 - jQuery/SignalR
 
-## Backend
+### Backend
 - [Abot Web Crawler (fork)](https://github.com/michi-at/abot) ← [Original](https://github.com/sjdirect/abot)
 - ASP.NET MVC 5
 - Autofac
