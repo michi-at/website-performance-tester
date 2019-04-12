@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ViewChild, NgZone } from '@angular/core';
 import { MatRow, MatTable } from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 
@@ -17,7 +17,7 @@ export class DataTableComponent<T> implements OnInit {
     @Input() isLoading = true;
     @ViewChild('table') table: MatTable<T>;
 
-    @Output() rowSelected = new EventEmitter<MatRow>();
+    @Output() rowSelected = new EventEmitter<T>();
 
     columns: string[];
 
@@ -25,13 +25,13 @@ export class DataTableComponent<T> implements OnInit {
     allowMultiSelect = false;
     selection = new SelectionModel<MatRow>(this.allowMultiSelect, this.initialSelection);
 
-    constructor() { }
+    constructor(private ngZone: NgZone) { }
 
     ngOnInit() {
         this.columns = Object.keys(this.propertyTitles);
     }
 
-    onSelect(event: Event, row: MatRow) {
+    onSelect(event: Event, row: T) {
         if (this.canSelect) {
             this.selection.select(row);
             this.rowSelected.emit(row);
@@ -43,7 +43,7 @@ export class DataTableComponent<T> implements OnInit {
         if (this.canSelect) {
             const element: Element = e.target as Element;
             if (!this.exclude || !element.matches(this.exclude)) {
-                this.clearSelection();
+                this.ngZone.run(() => this.clearSelection());
             }
         }
     }
