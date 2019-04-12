@@ -59,7 +59,6 @@
     <Compile Include="Concrete\TestResultRepository.cs" />
     <Compile Include="Entities\TestResult.cs" />
     <Compile Include="Entities\TestResultDetail.cs" />
-    <Compile Include="Extensions\DbSetExtensions.cs" />
     <Compile Include="Extensions\DynamicExtensions.cs" />
     <Compile Include="PageTestingCompletedArgs.cs" />
     <Compile Include="PerformanceTester.cs" />
